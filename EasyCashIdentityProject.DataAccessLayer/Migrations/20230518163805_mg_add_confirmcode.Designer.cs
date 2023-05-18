@@ -4,6 +4,7 @@ using EasyCashIdentityProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyCashIdentityProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230518163805_mg_add_confirmcode")]
+    partial class mg_add_confirmcode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,7 +73,7 @@ namespace EasyCashIdentityProject.DataAccessLayer.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ConfirmCode")
+                    b.Property<int>("ConfirmCode")
                         .HasColumnType("int");
 
                     b.Property<string>("District")
