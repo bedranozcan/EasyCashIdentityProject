@@ -53,7 +53,7 @@ namespace EasyCashIdentityProject.PresentationLayer.Controllers
                     mimeMessage.To.Add(mailboxAddressTo);
 
                     var bodyBuilder = new BodyBuilder();
-                    bodyBuilder.TextBody = "Kayıt işleminizi gerçekleştirmek için onay kodunuz :" + code;
+                    bodyBuilder.TextBody = "Kayıt işleminizi gerçekleştirmek için onay kodunuz : " + code;
                     mimeMessage.Body=bodyBuilder.ToMessageBody();
                     mimeMessage.Subject = "Easy Cash Onay Kodu";
 
