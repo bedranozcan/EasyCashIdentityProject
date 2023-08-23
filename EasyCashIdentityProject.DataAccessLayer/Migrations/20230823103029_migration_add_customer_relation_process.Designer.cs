@@ -4,6 +4,7 @@ using EasyCashIdentityProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyCashIdentityProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230823103029_migration_add_customer_relation_process")]
+    partial class migration_add_customer_relation_process
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,6 +189,9 @@ namespace EasyCashIdentityProject.DataAccessLayer.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("CustomerAccountID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ProcessDate")
                         .HasColumnType("datetime2");
 
@@ -201,6 +206,8 @@ namespace EasyCashIdentityProject.DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("CustomerAccountProcessID");
+
+                    b.HasIndex("CustomerAccountID");
 
                     b.HasIndex("ReceiverID");
 
@@ -325,6 +332,12 @@ namespace EasyCashIdentityProject.DataAccessLayer.Migrations
 
             modelBuilder.Entity("EasyCashIdentityProject.EntityLayer.Concrete.CustomerAccountProcess", b =>
                 {
+                    b.HasOne("EasyCashIdentityProject.EntityLayer.Concrete.CustomerAccount", "CustomerAccount")
+                        .WithMany()
+                        .HasForeignKey("CustomerAccountID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EasyCashIdentityProject.EntityLayer.Concrete.CustomerAccount", "ReceiverCustomer")
                         .WithMany("CustomerReceiver")
                         .HasForeignKey("ReceiverID");
@@ -332,6 +345,8 @@ namespace EasyCashIdentityProject.DataAccessLayer.Migrations
                     b.HasOne("EasyCashIdentityProject.EntityLayer.Concrete.CustomerAccount", "SenderCustomer")
                         .WithMany("CustomerSender")
                         .HasForeignKey("SenderID");
+
+                    b.Navigation("CustomerAccount");
 
                     b.Navigation("ReceiverCustomer");
 
