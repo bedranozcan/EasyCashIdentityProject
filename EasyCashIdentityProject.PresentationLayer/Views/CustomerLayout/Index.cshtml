@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -10,16 +9,10 @@
         <div class="main_container">
             @await Component.InvokeAsync("_CustomerLayoutSidebarPartial");
             @await Component.InvokeAsync("_CustomerLayoutNavbarPartial");
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>@RenderBody()</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>     
-            @await Component.InvokeAsync("_CustomerLayoutFooterPartial");      
+            <div class="" role="main">
+                <h3>@RenderBody()</h3>
+            </div>
+            @await Component.InvokeAsync("_CustomerLayoutFooterPartial");
         </div>
     </div>
     @await Component.InvokeAsync("_CustomerLayoutScriptPartial");
